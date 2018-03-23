@@ -29,18 +29,18 @@ class SignUpForm extends Component {
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state
+    const { email, passwordOne } = this.state
     const { history } = this.props
 
-    auth.doCreateEmailAndPassword(email, passwordOne)
+    event.preventDefault()
+    auth.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        this.setStaet(() => ({ ...INITIAL_STATE }))
+        this.setState(() => ({ ...INITIAL_STATE }))
         history.push(routes.HOME)
       })
       .catch(error => {
         this.setState(byPropKey('error', error))
       })
-    event.preventDefault()
   }
 
   render() {
@@ -89,8 +89,7 @@ class SignUpForm extends Component {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account?
-    {' '}
+    No account?
     <Link to={ routes.SIGN_UP }>Sign Up</Link>
   </p>
 )

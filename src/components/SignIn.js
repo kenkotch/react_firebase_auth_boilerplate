@@ -31,6 +31,7 @@ class SignInForm extends Component {
   }
 
   onSubmit = event => {
+    event.preventDefault()
     const {
       email,
       password
@@ -46,8 +47,6 @@ class SignInForm extends Component {
       .catch(error => {
         this.setState(byPropKey('error', error))
       })
-
-    event.preventDefault()
   }
 
   render() {
